@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Sapper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div id="hud" class="hidden">
+    <div class="panel stat"><span class="label">Mines</span><span id="mines" class="value">0</span></div>
+    <div class="panel stat"><span class="label">Time</span><span id="timer" class="value">000</span></div>
+    <div class="panel stat"><span class="label">Mode</span><span id="mode" class="value small">Easy</span></div>
+    <div class="spacer"></div>
+    <button id="btn-restart" class="btn">Restart</button>
+    <button id="btn-new" class="btn">New Game</button>
+    <button id="btn-settings" class="btn icon" title="Settings" aria-label="Settings">&#9881;</button>
+  </div>
+  <div id="hint" class="hidden">LMB open · RMB flag · MMB / click number: chord · drag to orbit · wheel to zoom</div>
+
+  <!-- Start menu -->
+  <div id="menu" class="overlay">
+    <div class="card menu-card">
+      <h1>3D <span>SAPPER</span></h1>
+      <p class="tag">Clear the whole field to reveal the photo.</p>
+      <div class="modes" id="modes">
+        <button class="mode" data-mode="easy"><b>Easy</b><small>9 × 9 · 10 mines</small></button>
+        <button class="mode" data-mode="medium"><b>Medium</b><small>16 × 16 · 40 mines</small></button>
+        <button class="mode" data-mode="hard"><b>Hard</b><small>24 × 16 · 85 mines</small></button>
+        <button class="mode" data-mode="custom"><b>Custom</b><small>your own field</small></button>
+      </div>
+      <div id="custom" class="custom hidden">
+        <label>Width <input id="c-w" type="number" min="5" max="30" value="12" /></label>
+        <label>Height <input id="c-h" type="number" min="5" max="30" value="12" /></label>
+        <label>Mines <input id="c-m" type="number" min="1" value="20" /></label>
+        <div id="c-info" class="info"></div>
+        <button id="c-start" class="btn primary">Start custom game</button>
+      </div>
+      <div id="best" class="best"></div>
+      <button id="menu-resume" class="btn hidden">Resume current game</button>
+    </div>
+  </div>
+
+  <!-- End of game -->
+  <div id="end" class="overlay hidden">
+    <div class="card end-card">
+      <h2 id="end-title">VICTORY</h2>
+      <p id="end-sub"></p>
+      <div class="row">
+        <button id="end-restart" class="btn primary">Play again</button>
+        <button id="end-new" class="btn">New Game</button>
+        <button id="end-view" class="btn">View board</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings" class="overlay hidden">
+    <div class="card settings-card">
+      <h3>Settings</h3>
+      <label class="toggle"><span>Sound effects</span><input id="s-sound" type="checkbox" checked /></label>
+      <label class="toggle"><span>Background music</span><input id="s-music" type="checkbox" checked /></label>
+      <label class="toggle"><span>Volume</span><input id="s-volume" type="range" min="0" max="1" step="0.05" value="0.6" /></label>
+      <label class="toggle"><span>Screen shake</span><input id="s-shake" type="checkbox" checked /></label>
+      <label class="toggle"><span>Slow auto-rotate</span><input id="s-rotate" type="checkbox" /></label>
+      <button id="s-close" class="btn primary">Close</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
